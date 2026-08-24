@@ -1,0 +1,10 @@
+{
+  "name":"EU VOU! — 59ª Corrida São Silvério",
+  "short_name":"EU VOU! São Silvério",
+  "start_url":"./",
+  "display":"standalone",
+  "background_color":"#f3f6f4",
+  "theme_color":"#006b32",
+  "lang":"pt-BR",
+  "description":"Personalize sua foto para a 59ª Corrida São Silvério."
+}
