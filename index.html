@@ -35,6 +35,9 @@ h1{font-size:25px;margin:0 0 6px}
 .dark{background:#242424;color:#fff;border:1px solid #3b3b3b}
 input[type=file]{display:none}
 input[type=range]{width:100%;accent-color:var(--gold)}
+.name-input{width:100%;height:46px;border:1px solid #444;border-radius:10px;background:#080808;color:#fff;padding:0 13px;font-size:15px;font-weight:700;outline:none}
+.name-input:focus{border-color:var(--gold);box-shadow:0 0 0 2px rgba(243,179,0,.12)}
+.name-input::placeholder{color:#777}
 .grid3{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:8px;margin-top:8px}
 .grid3 .btn{min-height:42px;padding:8px 4px}
 .download{min-height:50px}
@@ -73,6 +76,11 @@ footer{text-align:center;color:#555;font-size:11px;padding:0 20px 25px}
  <aside class="panel">
   <h1>Sua foto oficial</h1>
   <p class="intro">Escolha sua foto e ajuste dentro da moldura dourada. Você pode arrastar a foto diretamente sobre a arte.</p>
+  <div class="section name-section">
+   <div class="title">Nome do atleta</div>
+   <input id="athleteName" class="name-input" type="text" maxlength="45" placeholder="Digite seu nome" autocomplete="name">
+   <div class="note">O nome aparecerá na parte inferior da foto, com fonte em branco e contorno escuro.</div>
+  </div>
 
   <div class="section">
    <label class="btn gold" for="gallery">🖼️ ESCOLHER DA GALERIA</label>
@@ -132,12 +140,25 @@ const status=document.getElementById("status");
 const PHOTO={x:430,y:450,w:556,h:771};
 let photo=null;
 let state={x:PHOTO.x+PHOTO.w/2,y:PHOTO.y+PHOTO.h/2,zoom:1};
+const athleteName=document.getElementById("athleteName");
 let dragging=false,last={x:0,y:0};
 
 function statusMsg(t){status.textContent=t||""}
 function center(){if(!photo)return;state.x=PHOTO.x+PHOTO.w/2;state.y=PHOTO.y+PHOTO.h/2;state.zoom=1;zoom.value=1}
 function baseScale(){return photo?Math.max(PHOTO.w/photo.width,PHOTO.h/photo.height):1}
 function currentScale(){return baseScale()*state.zoom}
+function drawName(c){
+ const name=(athleteName.value||"").trim();
+ if(!name)return;
+ const maxW=PHOTO.w-36;
+ let size=42;
+ c.save(); c.textAlign="center"; c.textBaseline="alphabetic"; c.lineJoin="round";
+ c.font=`900 ${size}px Arial, Helvetica, sans-serif`;
+ while(c.measureText(name).width>maxW && size>18){size--;c.font=`900 ${size}px Arial, Helvetica, sans-serif`;}
+ c.lineWidth=Math.max(5,size*.12); c.strokeStyle="rgba(0,0,0,.9)"; c.strokeText(name,PHOTO.x+PHOTO.w/2,PHOTO.y+PHOTO.h-28);
+ c.fillStyle="#fff"; c.fillText(name,PHOTO.x+PHOTO.w/2,PHOTO.y+PHOTO.h-28); c.restore();
+}
+
 function draw(){
  ctx.fillStyle="#000";ctx.fillRect(0,0,canvas.width,canvas.height);
  if(photo){
@@ -146,6 +167,7 @@ function draw(){
   const s=currentScale(),w=photo.width*s,h=photo.height*s;
   ctx.drawImage(photo,state.x-w/2,state.y-h/2,w,h);
   ctx.restore();
+  drawName(ctx);
  }
  if(overlay.complete)ctx.drawImage(overlay,0,0,1024,1536);
  else {ctx.fillStyle="#fff";ctx.textAlign="center";ctx.font="bold 22px Arial";ctx.fillText("Carregando template...",512,768)}
@@ -170,6 +192,7 @@ function load(file){
 }
 gallery.onchange=e=>load(e.target.files[0]);
 camera.onchange=e=>load(e.target.files[0]);
+athleteName.addEventListener("input",draw);
 
 function point(e){
  const r=canvas.getBoundingClientRect();
