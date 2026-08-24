@@ -1,0 +1,16 @@
+{
+  "name": "Comrades 100 — Sua Foto Oficial",
+  "short_name": "Comrades 100",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#050505",
+  "theme_color": "#050505",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

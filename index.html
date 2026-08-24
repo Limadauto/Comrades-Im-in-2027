@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#050505">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Comrades 100">
+<meta name="description" content="Crie sua foto oficial da Comrades 100 e baixe pronta para Instagram Stories e Reels.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="assets/favicon.svg">
+<title>Comrades 100 — Sua Foto Oficial</title>
+<style>
+:root{--gold:#f4b400;--gold2:#ffca28;--bg:#050505;--panel:#111;--line:#292929;--muted:#a9a9a9}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:#fff;font-family:Arial,Helvetica,sans-serif}
+body{min-height:100vh}
+.header{padding:18px 16px 8px;text-align:center}
+.brand{font-weight:900;letter-spacing:2px;font-size:clamp(22px,5vw,34px)}
+.brand span{color:var(--gold)}
+.tag{color:#ddd;margin-top:7px;font-size:13px}
+.app{width:min(1120px,100%);margin:auto;padding:10px 14px 30px;display:grid;grid-template-columns:minmax(0,1fr) 370px;gap:20px}
+.preview{background:#0d0d0d;border:1px solid var(--line);border-radius:18px;padding:12px;display:flex;justify-content:center;align-items:center}
+.canvasBox{width:min(100%,650px);background:#000;border-radius:12px;overflow:hidden;position:relative}
+canvas{width:100%;height:auto;display:block;touch-action:none}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px;align-self:start;position:sticky;top:12px}
+h1{font-size:23px;margin:0 0 5px}
+.lead{color:var(--muted);line-height:1.45;margin:0 0 15px;font-size:14px}
+.btn{width:100%;border:0;border-radius:12px;padding:14px 12px;margin-top:9px;font-size:15px;font-weight:900;cursor:pointer}
+.gold{background:var(--gold);color:#111}
+.dark{background:#242424;color:#fff;border:1px solid #3b3b3b}
+.white{background:#fff;color:#111}
+input[type=file]{display:none}
+.control{margin-top:17px;padding-top:16px;border-top:1px solid var(--line)}
+.title{font-weight:900;margin-bottom:8px}
+.range{width:100%;accent-color:var(--gold)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.grid3 .btn{margin-top:7px;padding:11px 5px}
+.formats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.format{background:#181818;border:1px solid #303030;border-radius:10px;padding:10px;text-align:center;font-size:12px;color:#bbb}
+.format b{display:block;color:#fff;font-size:13px;margin-bottom:2px}
+.status{min-height:18px;margin-top:9px;color:var(--gold);font-size:12px;font-weight:800}
+.help{margin-top:16px;background:#181818;border-radius:11px;padding:13px;color:#aaa;font-size:12px;line-height:1.55}
+.footer{text-align:center;color:#777;font-size:11px;padding:8px 18px 25px}
+@media(max-width:860px){
+ .app{grid-template-columns:1fr;padding:8px 10px 20px}
+ .panel{position:static}
+ .preview{padding:7px;border-radius:14px}
+}
+@media(max-width:520px){
+ .header{padding-top:calc(12px + env(safe-area-inset-top))}
+ .panel{padding:15px;border-radius:15px}
+ .formats{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="brand">COMRADES <span>100</span></div>
+  <div class="tag">THE GREATEST STORY EVER RUN • 13 JUNE 2027</div>
+</header>
+
+<main class="app">
+<section class="preview">
+  <div class="canvasBox"><canvas id="canvas" width="1024" height="1536"></canvas></div>
+</section>
+
+<aside class="panel">
+  <h1>Sua foto oficial</h1>
+  <p class="lead">Coloque sua foto no template da 100ª Comrades, ajuste do seu jeito e baixe pronta para compartilhar.</p>
+
+  <label class="btn gold" for="gallery">🖼️ ESCOLHER DA GALERIA</label>
+  <input id="gallery" type="file" accept="image/*">
+
+  <label class="btn dark" for="camera">📷 TIRAR UMA FOTO</label>
+  <input id="camera" type="file" accept="image/*" capture="environment">
+
+  <div class="control">
+    <div class="title">Tamanho da foto</div>
+    <input id="zoom" class="range" type="range" min=".35" max="3.5" step=".01" value="1">
+    <div class="grid3">
+      <button class="btn dark" id="minus">−</button>
+      <button class="btn dark" id="center">CENTRALIZAR</button>
+      <button class="btn dark" id="plus">+</button>
+    </div>
+  </div>
+
+  <div class="control">
+    <div class="title">Mover foto</div>
+    <div class="grid3">
+      <button class="btn dark" id="up">↑</button>
+      <button class="btn dark" id="reset">RESET</button>
+      <button class="btn dark" id="down">↓</button>
+    </div>
+    <div class="grid3">
+      <button class="btn dark" id="left">←</button>
+      <button class="btn dark" id="right">→</button>
+      <button class="btn dark" id="fit">AJUSTAR</button>
+    </div>
+  </div>
+
+  <div class="control">
+    <div class="title">Formato do download</div>
+    <div class="formats">
+      <div class="format"><b>Stories / Reels</b>1080 × 1920 • 9:16</div>
+      <div class="format"><b>Template original</b>1024 × 1536</div>
+    </div>
+    <button class="btn white" id="downloadStory">⬇️ BAIXAR STORIES / REELS</button>
+    <button class="btn gold" id="downloadOriginal">⬇️ BAIXAR IMAGEM ORIGINAL</button>
+    <div id="status" class="status"></div>
+  </div>
+
+  <div class="help">
+    <b>Feito para celular e computador.</b><br>
+    Arraste a foto diretamente sobre a arte. No celular, use os dedos para posicionar e os controles para ampliar ou reduzir. A foto fica no aparelho durante todo o processo.
+  </div>
+</aside>
+</main>
+
+<div class="footer">COMRADES 100 • THE ULTIMATE HUMAN RACE • 13 JUNE 2027</div>
+
+<script>
+const overlay = new Image();
+overlay.src = "assets/template.png";
+
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d", {alpha:false});
+const zoom = document.getElementById("zoom");
+const status = document.getElementById("status");
+
+const PHOTO = {x:429,y:443,w:557,h:787};
+let photo=null;
+let state={x:PHOTO.x+PHOTO.w/2,y:PHOTO.y+PHOTO.h/2,zoom:1};
+let drag=false,last={x:0,y:0};
+
+function msg(t){status.textContent=t||""}
+function readFile(file){
+ if(!file)return;
+ const fr=new FileReader();
+ fr.onload=e=>{
+   const im=new Image();
+   im.onload=()=>{photo=im; center(); msg("Foto carregada. Arraste para ajustar."); draw();}
+   im.src=e.target.result;
+ };
+ fr.readAsDataURL(file);
+}
+document.getElementById("gallery").onchange=e=>readFile(e.target.files[0]);
+document.getElementById("camera").onchange=e=>readFile(e.target.files[0]);
+
+function baseScale(){return photo?Math.max(PHOTO.w/photo.width,PHOTO.h/photo.height):1}
+function scale(){return baseScale()*state.zoom}
+function center(){if(!photo)return;state.x=PHOTO.x+PHOTO.w/2;state.y=PHOTO.y+PHOTO.h/2;state.zoom=1;zoom.value=1}
+function fit(){if(!photo)return;state.zoom=1;zoom.value=1;state.x=PHOTO.x+PHOTO.w/2;state.y=PHOTO.y+PHOTO.h/2;draw()}
+
+function draw(){
+ ctx.fillStyle="#000";ctx.fillRect(0,0,canvas.width,canvas.height);
+ if(photo){
+   ctx.save();ctx.beginPath();ctx.rect(PHOTO.x,PHOTO.y,PHOTO.w,PHOTO.h);ctx.clip();
+   const s=scale(),w=photo.width*s,h=photo.height*s;
+   ctx.drawImage(photo,state.x-w/2,state.y-h/2,w,h);ctx.restore();
+ }
+ if(overlay.complete)ctx.drawImage(overlay,0,0,canvas.width,canvas.height);
+ if(!photo){
+   ctx.fillStyle="rgba(255,255,255,.9)";ctx.textAlign="center";ctx.font="900 25px Arial";
+   ctx.fillText("ESCOLHA UMA FOTO PARA COMEÇAR",PHOTO.x+PHOTO.w/2,PHOTO.y+PHOTO.h/2);
+ }
+}
+overlay.onload=draw; draw();
+
+function point(e){
+ const r=canvas.getBoundingClientRect();
+ return {x:(e.clientX-r.left)*canvas.width/r.width,y:(e.clientY-r.top)*canvas.height/r.height}
+}
+canvas.addEventListener("pointerdown",e=>{
+ if(!photo)return;drag=true;canvas.setPointerCapture(e.pointerId);last=point(e);
+});
+canvas.addEventListener("pointermove",e=>{
+ if(!drag||!photo)return;const p=point(e);state.x+=p.x-last.x;state.y+=p.y-last.y;last=p;draw();
+});
+canvas.addEventListener("pointerup",()=>drag=false);
+canvas.addEventListener("pointercancel",()=>drag=false);
+
+zoom.oninput=()=>{state.zoom=+zoom.value;draw()}
+function move(dx,dy){if(!photo)return;state.x+=dx;state.y+=dy;draw()}
+document.getElementById("up").onclick=()=>move(0,-15);
+document.getElementById("down").onclick=()=>move(0,15);
+document.getElementById("left").onclick=()=>move(-15,0);
+document.getElementById("right").onclick=()=>move(15,0);
+document.getElementById("center").onclick=()=>{center();draw()};
+document.getElementById("reset").onclick=()=>{center();draw()};
+document.getElementById("fit").onclick=fit;
+document.getElementById("plus").onclick=()=>{zoom.value=Math.min(3.5,+zoom.value+.1);state.zoom=+zoom.value;draw()};
+document.getElementById("minus").onclick=()=>{zoom.value=Math.max(.35,+zoom.value-.1);state.zoom=+zoom.value;draw()};
+
+function render(outW,outH){
+ const out=document.createElement("canvas");out.width=outW;out.height=outH;
+ const c=out.getContext("2d",{alpha:false});
+ c.fillStyle="#000";c.fillRect(0,0,outW,outH);
+ const sx=outW/canvas.width, sy=outH/canvas.height;
+ c.save();c.scale(sx,sy);
+ if(photo){
+   c.save();c.beginPath();c.rect(PHOTO.x,PHOTO.y,PHOTO.w,PHOTO.h);c.clip();
+   const s=scale(),w=photo.width*s,h=photo.height*s;
+   c.drawImage(photo,state.x-w/2,state.y-h/2,w,h);c.restore();
+ }
+ c.drawImage(overlay,0,0,canvas.width,canvas.height);
+ c.restore();
+ return out;
+}
+function download(kind){
+ if(!photo){msg("Escolha uma foto antes de baixar.");return}
+ const out=kind==="story"?render(1080,1920):render(1024,1536);
+ out.toBlob(blob=>{
+   const url=URL.createObjectURL(blob),a=document.createElement("a");
+   a.href=url;a.download=kind==="story"?"comrades-100-stories-reels.png":"comrades-100-original.png";
+   document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
+   msg("Imagem baixada. Agora é só publicar no Instagram.");
+ },"image/png");
+}
+document.getElementById("downloadStory").onclick=()=>download("story");
+document.getElementById("downloadOriginal").onclick=()=>download("original");
+
+document.addEventListener("keydown",e=>{
+ if(!photo)return;const n=e.shiftKey?30:10;
+ if(e.key==="ArrowUp")move(0,-n); if(e.key==="ArrowDown")move(0,n);
+ if(e.key==="ArrowLeft")move(-n,0); if(e.key==="ArrowRight")move(n,0);
+});
+</script>
+</body>
+</html>
