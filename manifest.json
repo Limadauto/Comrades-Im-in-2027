@@ -1,10 +1,15 @@
 {
-  "name":"EU VOU! — 59ª Corrida São Silvério",
-  "short_name":"EU VOU! São Silvério",
-  "start_url":"./",
-  "display":"standalone",
-  "background_color":"#f3f6f4",
-  "theme_color":"#006b32",
-  "lang":"pt-BR",
-  "description":"Personalize sua foto para a 59ª Corrida São Silvério."
+  "name": "I'm In! — 100th Comrades",
+  "short_name": "I'm In! Comrades",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#090909",
+  "theme_color": "#b88700",
+  "icons": [
+    {
+      "src": "template-overlay.png",
+      "sizes": "1024x1536",
+      "type": "image/png"
+    }
+  ]
 }

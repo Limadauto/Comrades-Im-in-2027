@@ -3,20 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#006b32">
-<meta name="description" content="Personalize sua foto para a 59ª Corrida São Silvério.">
+<meta name="theme-color" content="#b88700">
+<meta name="description" content="Personalize sua foto para a 100ª Comrades.">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="template-overlay.png">
-<title>EU VOU! — 59ª Corrida São Silvério</title>
+<title>I'M IN! — 100ª Comrades</title>
 <style>
-:root{--green:#006b32;--dark:#073d23;--yellow:#ffd400;--cream:#fffdf5;--bg:#f3f6f4;--ink:#163528;--muted:#60746a;--line:#dfe9e3}
+:root{--green:#b88700;--dark:#090909;--yellow:#f4c400;--cream:#fffdf5;--bg:#f3f3f3;--ink:#171717;--muted:#666;--line:#e5e5e5}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at 50% -10%,#fff 0,#f3f6f4 52%,#e9efeb 100%);color:var(--ink);min-height:100vh}
 button,input,select{font:inherit}
 button{cursor:pointer}
 .app{max-width:1120px;margin:auto;padding:18px 16px 28px}
-.hero{position:relative;overflow:hidden;border-radius:28px;background:linear-gradient(135deg,#073d23 0%,#006b32 58%,#0a7c3d 100%);color:#fff;padding:34px 28px 30px;box-shadow:0 18px 50px #073d2326;margin-bottom:18px}
+.hero{position:relative;overflow:hidden;border-radius:28px;background:linear-gradient(135deg,#050505 0%,#171717 58%,#090909 100%);color:#fff;padding:34px 28px 30px;box-shadow:0 18px 50px #073d2326;margin-bottom:18px}
 .hero:before,.hero:after{content:"";position:absolute;border-radius:999px;background:#ffd400;opacity:.9;transform:rotate(-9deg)}
 .hero:before{width:280px;height:18px;right:-70px;top:28px}.hero:after{width:190px;height:10px;left:-55px;bottom:25px}
 .hero-inner{position:relative;z-index:1;max-width:760px}
@@ -34,9 +34,9 @@ button{cursor:pointer}
 <div class="app">
   <section id="landing" class="hero">
     <div class="hero-inner">
-      <div class="kicker">🏃 59ª CORRIDA SÃO SILVÉRIO • 13 DE DEZEMBRO</div>
-      <h1><span>EU VOU!</span><br>Coloque sua foto e compartilhe.</h1>
-      <p>Personalize sua imagem da 59ª Corrida São Silvério em poucos segundos. Escolha uma foto da galeria ou tire uma nova, ajuste o enquadramento e baixe pronta para o Instagram.</p>
+      <div class="kicker">🏃 100ª COMRADES • SUNDAY 13 JUNE 2027</div>
+      <h1><span>I'M IN!</span><br>Put your photo in and share your Comrades story.</h1>
+      <p>Personalize your 100th Comrades image in a few seconds. Choose a photo from your gallery or take a new one, adjust the framing and download it ready for Instagram.</p>
       <div class="hero-actions">
         <button id="startGallery" class="btn btn-primary">🖼️ ESCOLHER DA GALERIA</button>
         <button id="startCamera" class="btn btn-ghost">📷 TIRAR UMA FOTO</button>
@@ -82,7 +82,7 @@ button{cursor:pointer}
       <div class="stepcard"><strong>4 • Compartilhe</strong><span>Publique sua imagem e mostre que você vai!</span></div>
     </div>
   </section>
-  <div class="footer">A foto é processada localmente. Nenhuma foto é enviada ou armazenada por este site.</div>
+  <div class="footer">Your photo is processed locally. Nothing is uploaded or stored by this site.</div>
 </div>
 <script>
 const canvas=document.getElementById('canvas'),ctx=canvas.getContext('2d');const preview=document.getElementById('preview');const img=new Image();
@@ -95,7 +95,7 @@ function openCamera(){showEditor();cameraInput.value='';cameraInput.click()}
 document.getElementById('startGallery').addEventListener('click',openGallery);document.getElementById('startCamera').addEventListener('click',openCamera);galleryBtn.addEventListener('click',openGallery);cameraBtn.addEventListener('click',openCamera);document.getElementById('backBtn').addEventListener('click',showLanding);
 const overlay=new Image();overlay.src='template-overlay.png';
 let loaded=false,scale=1,x=512,y=643,dragging=false,lastX=0,lastY=0,pinchStart=0,baseScale=1;
-const photoBox={x:112,y:318,w:800,h:650};
+const photoBox={x:429,y:443,w:557,h:787};
 function mode(){return document.getElementById('format').value}function dims(){return mode()==='story'?{w:1080,h:1920}:{w:1024,h:1536}}
 function artTransform(){const d=dims();if(mode()==='original')return{s:1,ox:0,oy:0};const s=d.h/1536;return{s,ox:(d.w-1024*s)/2,oy:0}}
 function resizeCanvas(){const d=dims();canvas.width=d.w;canvas.height=d.h;preview.classList.toggle('story',mode()==='story');draw()}
@@ -111,7 +111,7 @@ fileInput.addEventListener('change',handleFile);cameraInput.addEventListener('ch
 document.querySelectorAll('[data-move]').forEach(b=>b.onclick=()=>{const v=b.dataset.move,n=18;if(v==='up')y-=n;if(v==='down')y+=n;if(v==='left')x-=n;if(v==='right')x+=n;draw()});
 function exportBlob(){const out=document.createElement('canvas');const d=dims();out.width=d.w;out.height=d.h;const octx=out.getContext('2d');const t=artTransform();octx.fillStyle='#fff';octx.fillRect(0,0,d.w,d.h);octx.save();octx.translate(t.ox,t.oy);octx.scale(t.s,t.s);octx.save();octx.beginPath();octx.rect(photoBox.x,photoBox.y,photoBox.w,photoBox.h);octx.clip();if(loaded){const fit=Math.max(photoBox.w/img.naturalWidth,photoBox.h/img.naturalHeight)*scale;const dw=img.naturalWidth*fit,dh=img.naturalHeight*fit;octx.drawImage(img,x-dw/2,y-dh/2,dw,dh)}octx.restore();octx.drawImage(overlay,0,0,1024,1536);octx.restore();const name=document.getElementById('name').value.trim();if(name){octx.save();octx.font='900 '+(34*t.s)+'px system-ui,sans-serif';octx.textAlign='center';octx.textBaseline='middle';octx.fillStyle='#fff';octx.strokeStyle='#006b32';octx.lineWidth=7*t.s;const px=(photoBox.x+photoBox.w/2)*t.s+t.ox,py=(photoBox.y+photoBox.h-42)*t.s+t.oy;octx.strokeText(name.toUpperCase(),px,py);octx.fillText(name.toUpperCase(),px,py);octx.restore()}return new Promise(r=>out.toBlob(r,'image/png',1))}
 document.getElementById('download').onclick=async()=>{if(!loaded){alert('Escolha uma foto primeiro.');return}const blob=await exportBlob();const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='eu-vou-sao-silverio.png';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
-document.getElementById('share').onclick=async()=>{if(!loaded){alert('Escolha uma foto primeiro.');return}const blob=await exportBlob();const file=new File([blob],'eu-vou-sao-silverio.png',{type:'image/png'});if(navigator.share&&(!navigator.canShare||navigator.canShare({files:[file]}))){try{await navigator.share({title:'Eu Vou! — São Silvério',text:'Eu vou para a 59ª Corrida São Silvério!',files:[file]})}catch(e){}}else{const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='eu-vou-sao-silverio.png';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}};
+document.getElementById('share').onclick=async()=>{if(!loaded){alert('Escolha uma foto primeiro.');return}const blob=await exportBlob();const file=new File([blob],'eu-vou-sao-silverio.png',{type:'image/png'});if(navigator.share&&(!navigator.canShare||navigator.canShare({files:[file]}))){try{await navigator.share({title:'Eu Vou! — São Silvério',text:'Eu vou para a 100ª Comrades!',files:[file]})}catch(e){}}else{const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='eu-vou-sao-silverio.png';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}};
 overlay.onload=resizeCanvas;resizeCanvas();
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
 </script>
