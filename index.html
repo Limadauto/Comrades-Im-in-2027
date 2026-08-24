@@ -228,6 +228,7 @@ function renderOriginal(){
   c.save();c.beginPath();c.rect(PHOTO.x,PHOTO.y,PHOTO.w,PHOTO.h);c.clip();
   const s=currentScale(),w=photo.width*s,h=photo.height*s;
   c.drawImage(photo,state.x-w/2,state.y-h/2,w,h);c.restore();
+  drawName(c);
  }
  c.drawImage(overlay,0,0,1024,1536);
  return out;
@@ -241,6 +242,7 @@ function renderStory(){
   c.save();c.beginPath();c.rect(PHOTO.x,PHOTO.y,PHOTO.w,PHOTO.h);c.clip();
   const z=currentScale(),w=photo.width*z,h=photo.height*z;
   c.drawImage(photo,state.x-w/2,state.y-h/2,w,h);c.restore();
+  drawName(c);
  }
  c.drawImage(overlay,0,0,1024,1536);c.restore();
  return out;
