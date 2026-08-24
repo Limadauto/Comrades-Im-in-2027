@@ -1,17 +1,15 @@
-COMRADES 100 — TEMPLATE WEB
+COMRADES 100 — V3
+Esta versão usa o template EXATO enviado e transforma somente a área interna da moldura em transparência, para que a foto apareça atrás da moldura dourada.
 
-Arquivos:
-- index.html: página principal
-- manifest.webmanifest: permite instalação como PWA
-- sw.js: cache para uso posterior
-- assets/template.png: template oficial
+Substitua os arquivos do GitHub pelos desta pasta. Todos devem ficar na RAIZ:
+index.html
+template-overlay.png
+template-original.png
+favicon.svg
+manifest.webmanifest
+sw.js
 
-COMO PUBLICAR:
-1. Envie todos os arquivos e a pasta assets para uma hospedagem estática.
-2. Aponte um domínio/subdomínio para a pasta publicada.
-3. A página deve abrir em HTTPS para câmera/PWA funcionarem corretamente.
-4. Compartilhe o link com os atletas.
+GitHub Pages:
+Settings > Pages > Deploy from a branch > main > /(root)
 
-Compatível com navegadores modernos em Android, iPhone/iPad, Windows e Mac.
-O download de Stories/Reels é gerado em 1080x1920 (9:16).
-O download original é gerado em 1024x1536.
+Depois faça Ctrl+F5 ou abra uma janela anônima para testar.

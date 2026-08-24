@@ -6,225 +6,240 @@
 <meta name="theme-color" content="#050505">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Comrades 100">
-<meta name="description" content="Crie sua foto oficial da Comrades 100 e baixe pronta para Instagram Stories e Reels.">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="assets/favicon.svg">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./favicon.svg">
 <title>Comrades 100 — Sua Foto Oficial</title>
 <style>
-:root{--gold:#f4b400;--gold2:#ffca28;--bg:#050505;--panel:#111;--line:#292929;--muted:#a9a9a9}
+:root{--gold:#f3b300;--black:#050505;--panel:#111;--line:#292929}
 *{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:#fff;font-family:Arial,Helvetica,sans-serif}
+html,body{margin:0;background:var(--black);color:#fff;font-family:Arial,Helvetica,sans-serif}
 body{min-height:100vh}
-.header{padding:18px 16px 8px;text-align:center}
-.brand{font-weight:900;letter-spacing:2px;font-size:clamp(22px,5vw,34px)}
-.brand span{color:var(--gold)}
-.tag{color:#ddd;margin-top:7px;font-size:13px}
-.app{width:min(1120px,100%);margin:auto;padding:10px 14px 30px;display:grid;grid-template-columns:minmax(0,1fr) 370px;gap:20px}
-.preview{background:#0d0d0d;border:1px solid var(--line);border-radius:18px;padding:12px;display:flex;justify-content:center;align-items:center}
-.canvasBox{width:min(100%,650px);background:#000;border-radius:12px;overflow:hidden;position:relative}
-canvas{width:100%;height:auto;display:block;touch-action:none}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px;align-self:start;position:sticky;top:12px}
-h1{font-size:23px;margin:0 0 5px}
-.lead{color:var(--muted);line-height:1.45;margin:0 0 15px;font-size:14px}
-.btn{width:100%;border:0;border-radius:12px;padding:14px 12px;margin-top:9px;font-size:15px;font-weight:900;cursor:pointer}
+header{max-width:1240px;margin:auto;padding:24px 20px 12px;text-align:center}
+header .brand{font-weight:900;letter-spacing:3px;font-size:clamp(22px,3vw,34px)}
+header .brand b{color:var(--gold)}
+header p{margin:7px 0 0;color:#aaa;font-size:13px}
+.app{width:min(1240px,100%);margin:auto;padding:12px 20px 35px;display:grid;grid-template-columns:minmax(500px,1fr) 370px;gap:24px;align-items:start}
+.preview-card{background:#0b0b0b;border:1px solid #292929;border-radius:18px;padding:18px;box-shadow:0 12px 40px #000}
+.preview{width:min(100%,620px);margin:auto;position:relative}
+canvas{display:block;width:100%;height:auto;background:#000;border-radius:7px;touch-action:none;box-shadow:0 5px 25px #000}
+.panel{background:var(--panel);border:1px solid #292929;border-radius:18px;padding:20px;position:sticky;top:14px;box-shadow:0 12px 40px #000}
+h1{font-size:25px;margin:0 0 6px}
+.intro{color:#aaa;font-size:13px;line-height:1.45;margin:0 0 16px}
+.section{border-top:1px solid var(--line);padding-top:15px;margin-top:15px}
+.section:first-of-type{border-top:0;padding-top:0;margin-top:0}
+.title{font-weight:900;font-size:14px;margin-bottom:8px}
+.btn{width:100%;border:0;border-radius:10px;min-height:46px;padding:11px 10px;font-size:14px;font-weight:900;cursor:pointer}
+.btn+.btn{margin-top:8px}
 .gold{background:var(--gold);color:#111}
-.dark{background:#242424;color:#fff;border:1px solid #3b3b3b}
 .white{background:#fff;color:#111}
+.dark{background:#242424;color:#fff;border:1px solid #3b3b3b}
 input[type=file]{display:none}
-.control{margin-top:17px;padding-top:16px;border-top:1px solid var(--line)}
-.title{font-weight:900;margin-bottom:8px}
-.range{width:100%;accent-color:var(--gold)}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
-.grid3 .btn{margin-top:7px;padding:11px 5px}
-.formats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.format{background:#181818;border:1px solid #303030;border-radius:10px;padding:10px;text-align:center;font-size:12px;color:#bbb}
-.format b{display:block;color:#fff;font-size:13px;margin-bottom:2px}
-.status{min-height:18px;margin-top:9px;color:var(--gold);font-size:12px;font-weight:800}
-.help{margin-top:16px;background:#181818;border-radius:11px;padding:13px;color:#aaa;font-size:12px;line-height:1.55}
-.footer{text-align:center;color:#777;font-size:11px;padding:8px 18px 25px}
-@media(max-width:860px){
- .app{grid-template-columns:1fr;padding:8px 10px 20px}
+input[type=range]{width:100%;accent-color:var(--gold)}
+.grid3{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:8px;margin-top:8px}
+.grid3 .btn{min-height:42px;padding:8px 4px}
+.download{min-height:50px}
+.note{font-size:11px;line-height:1.45;color:#8e8e8e;margin-top:8px}
+.status{min-height:18px;color:var(--gold);font-weight:800;font-size:12px;margin-top:8px}
+.privacy{background:#191919;border-radius:10px;padding:12px;color:#aaa;font-size:12px;line-height:1.5;margin-top:16px}
+footer{text-align:center;color:#555;font-size:11px;padding:0 20px 25px}
+@media(max-width:900px){
+ .app{grid-template-columns:1fr;padding:8px 12px 25px}
  .panel{position:static}
- .preview{padding:7px;border-radius:14px}
+ .preview-card{padding:10px}
+ .preview{width:min(100%,560px)}
+ header{padding-top:18px}
 }
 @media(max-width:520px){
- .header{padding-top:calc(12px + env(safe-area-inset-top))}
- .panel{padding:15px;border-radius:15px}
- .formats{grid-template-columns:1fr 1fr}
+ header{padding:14px 12px 8px}
+ header p{font-size:11px}
+ .app{padding:5px 8px 20px;gap:12px}
+ .preview-card{padding:6px;border-radius:12px}
+ .panel{padding:15px;border-radius:14px}
+ h1{font-size:22px}
 }
 </style>
 </head>
 <body>
-<header class="header">
-  <div class="brand">COMRADES <span>100</span></div>
-  <div class="tag">THE GREATEST STORY EVER RUN • 13 JUNE 2027</div>
+<header>
+ <div class="brand">COMRADES <b>100</b></div>
+ <p>THE GREATEST STORY EVER RUN • SUNDAY 13 JUNE 2027</p>
 </header>
 
 <main class="app">
-<section class="preview">
-  <div class="canvasBox"><canvas id="canvas" width="1024" height="1536"></canvas></div>
-</section>
+ <section class="preview-card">
+  <div class="preview"><canvas id="canvas" width="1024" height="1536"></canvas></div>
+ </section>
 
-<aside class="panel">
+ <aside class="panel">
   <h1>Sua foto oficial</h1>
-  <p class="lead">Coloque sua foto no template da 100ª Comrades, ajuste do seu jeito e baixe pronta para compartilhar.</p>
+  <p class="intro">Escolha sua foto e ajuste dentro da moldura dourada. Você pode arrastar a foto diretamente sobre a arte.</p>
 
-  <label class="btn gold" for="gallery">🖼️ ESCOLHER DA GALERIA</label>
-  <input id="gallery" type="file" accept="image/*">
-
-  <label class="btn dark" for="camera">📷 TIRAR UMA FOTO</label>
-  <input id="camera" type="file" accept="image/*" capture="environment">
-
-  <div class="control">
-    <div class="title">Tamanho da foto</div>
-    <input id="zoom" class="range" type="range" min=".35" max="3.5" step=".01" value="1">
-    <div class="grid3">
-      <button class="btn dark" id="minus">−</button>
-      <button class="btn dark" id="center">CENTRALIZAR</button>
-      <button class="btn dark" id="plus">+</button>
-    </div>
+  <div class="section">
+   <label class="btn gold" for="gallery">🖼️ ESCOLHER DA GALERIA</label>
+   <input id="gallery" type="file" accept="image/*">
+   <label class="btn dark" for="camera">📷 TIRAR UMA FOTO</label>
+   <input id="camera" type="file" accept="image/*" capture="environment">
   </div>
 
-  <div class="control">
-    <div class="title">Mover foto</div>
-    <div class="grid3">
-      <button class="btn dark" id="up">↑</button>
-      <button class="btn dark" id="reset">RESET</button>
-      <button class="btn dark" id="down">↓</button>
-    </div>
-    <div class="grid3">
-      <button class="btn dark" id="left">←</button>
-      <button class="btn dark" id="right">→</button>
-      <button class="btn dark" id="fit">AJUSTAR</button>
-    </div>
+  <div class="section">
+   <div class="title">Tamanho da foto</div>
+   <input id="zoom" type="range" min=".35" max="3.5" step=".01" value="1">
+   <div class="grid3">
+    <button class="btn dark" id="minus">−</button>
+    <button class="btn dark" id="center">CENTRALIZAR</button>
+    <button class="btn dark" id="plus">+</button>
+   </div>
   </div>
 
-  <div class="control">
-    <div class="title">Formato do download</div>
-    <div class="formats">
-      <div class="format"><b>Stories / Reels</b>1080 × 1920 • 9:16</div>
-      <div class="format"><b>Template original</b>1024 × 1536</div>
-    </div>
-    <button class="btn white" id="downloadStory">⬇️ BAIXAR STORIES / REELS</button>
-    <button class="btn gold" id="downloadOriginal">⬇️ BAIXAR IMAGEM ORIGINAL</button>
-    <div id="status" class="status"></div>
+  <div class="section">
+   <div class="title">Posição da foto</div>
+   <div class="grid3">
+    <button class="btn dark" id="up">↑</button>
+    <button class="btn dark" id="reset">RESET</button>
+    <button class="btn dark" id="down">↓</button>
+   </div>
+   <div class="grid3">
+    <button class="btn dark" id="left">←</button>
+    <button class="btn dark" id="right">→</button>
+    <button class="btn dark" id="fit">AJUSTAR</button>
+   </div>
+   <div class="note">No celular: arraste com o dedo. No computador: arraste com o mouse ou use as setas do teclado.</div>
   </div>
 
-  <div class="help">
-    <b>Feito para celular e computador.</b><br>
-    Arraste a foto diretamente sobre a arte. No celular, use os dedos para posicionar e os controles para ampliar ou reduzir. A foto fica no aparelho durante todo o processo.
+  <div class="section">
+   <div class="title">Baixar</div>
+   <button class="btn white download" id="downloadStory">⬇️ STORIES / REELS — 1080 × 1920</button>
+   <button class="btn gold download" id="downloadOriginal">⬇️ IMAGEM OFICIAL — 1024 × 1536</button>
+   <div class="note">A versão 1080×1920 é criada sem deformar a arte original.</div>
+   <div id="status" class="status"></div>
   </div>
-</aside>
+
+  <div class="privacy"><b>Privacidade:</b> a foto do atleta não é enviada para servidor. A montagem é feita no próprio aparelho.</div>
+ </aside>
 </main>
-
-<div class="footer">COMRADES 100 • THE ULTIMATE HUMAN RACE • 13 JUNE 2027</div>
+<footer>COMRADES 100 • THE ULTIMATE HUMAN RACE</footer>
 
 <script>
-const overlay = new Image();
-overlay.src = "assets/template.png";
+const overlay=new Image();
+overlay.src="./template-overlay.png";
 
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d", {alpha:false});
-const zoom = document.getElementById("zoom");
-const status = document.getElementById("status");
+const canvas=document.getElementById("canvas");
+const ctx=canvas.getContext("2d",{alpha:false});
+const zoom=document.getElementById("zoom");
+const status=document.getElementById("status");
 
-const PHOTO = {x:429,y:443,w:557,h:787};
+/* Exact photo window of the supplied artwork */
+const PHOTO={x:430,y:450,w:556,h:771};
 let photo=null;
 let state={x:PHOTO.x+PHOTO.w/2,y:PHOTO.y+PHOTO.h/2,zoom:1};
-let drag=false,last={x:0,y:0};
+let dragging=false,last={x:0,y:0};
 
-function msg(t){status.textContent=t||""}
-function readFile(file){
- if(!file)return;
- const fr=new FileReader();
- fr.onload=e=>{
-   const im=new Image();
-   im.onload=()=>{photo=im; center(); msg("Foto carregada. Arraste para ajustar."); draw();}
-   im.src=e.target.result;
- };
- fr.readAsDataURL(file);
-}
-document.getElementById("gallery").onchange=e=>readFile(e.target.files[0]);
-document.getElementById("camera").onchange=e=>readFile(e.target.files[0]);
-
-function baseScale(){return photo?Math.max(PHOTO.w/photo.width,PHOTO.h/photo.height):1}
-function scale(){return baseScale()*state.zoom}
+function statusMsg(t){status.textContent=t||""}
 function center(){if(!photo)return;state.x=PHOTO.x+PHOTO.w/2;state.y=PHOTO.y+PHOTO.h/2;state.zoom=1;zoom.value=1}
-function fit(){if(!photo)return;state.zoom=1;zoom.value=1;state.x=PHOTO.x+PHOTO.w/2;state.y=PHOTO.y+PHOTO.h/2;draw()}
-
+function baseScale(){return photo?Math.max(PHOTO.w/photo.width,PHOTO.h/photo.height):1}
+function currentScale(){return baseScale()*state.zoom}
 function draw(){
  ctx.fillStyle="#000";ctx.fillRect(0,0,canvas.width,canvas.height);
  if(photo){
-   ctx.save();ctx.beginPath();ctx.rect(PHOTO.x,PHOTO.y,PHOTO.w,PHOTO.h);ctx.clip();
-   const s=scale(),w=photo.width*s,h=photo.height*s;
-   ctx.drawImage(photo,state.x-w/2,state.y-h/2,w,h);ctx.restore();
+  ctx.save();
+  ctx.beginPath();ctx.rect(PHOTO.x,PHOTO.y,PHOTO.w,PHOTO.h);ctx.clip();
+  const s=currentScale(),w=photo.width*s,h=photo.height*s;
+  ctx.drawImage(photo,state.x-w/2,state.y-h/2,w,h);
+  ctx.restore();
  }
- if(overlay.complete)ctx.drawImage(overlay,0,0,canvas.width,canvas.height);
+ if(overlay.complete)ctx.drawImage(overlay,0,0,1024,1536);
+ else {ctx.fillStyle="#fff";ctx.textAlign="center";ctx.font="bold 22px Arial";ctx.fillText("Carregando template...",512,768)}
  if(!photo){
-   ctx.fillStyle="rgba(255,255,255,.9)";ctx.textAlign="center";ctx.font="900 25px Arial";
-   ctx.fillText("ESCOLHA UMA FOTO PARA COMEÇAR",PHOTO.x+PHOTO.w/2,PHOTO.y+PHOTO.h/2);
+  ctx.fillStyle="rgba(255,255,255,.9)";ctx.textAlign="center";ctx.font="900 22px Arial";
+  ctx.fillText("ESCOLHA UMA FOTO PARA COMEÇAR",PHOTO.x+PHOTO.w/2,PHOTO.y+PHOTO.h/2);
  }
 }
-overlay.onload=draw; draw();
+overlay.onload=draw;
+overlay.onerror=()=>statusMsg("Não foi possível carregar template-overlay.png.");
+draw();
+
+function load(file){
+ if(!file)return;
+ const r=new FileReader();
+ r.onload=e=>{
+  const im=new Image();
+  im.onload=()=>{photo=im;center();statusMsg("Foto pronta. Arraste para posicionar.");draw()};
+  im.src=e.target.result;
+ };
+ r.readAsDataURL(file);
+}
+gallery.onchange=e=>load(e.target.files[0]);
+camera.onchange=e=>load(e.target.files[0]);
 
 function point(e){
  const r=canvas.getBoundingClientRect();
- return {x:(e.clientX-r.left)*canvas.width/r.width,y:(e.clientY-r.top)*canvas.height/r.height}
+ return {x:(e.clientX-r.left)*canvas.width/r.width,y:(e.clientY-r.top)*canvas.height/r.height};
 }
 canvas.addEventListener("pointerdown",e=>{
- if(!photo)return;drag=true;canvas.setPointerCapture(e.pointerId);last=point(e);
+ if(!photo)return;
+ dragging=true;canvas.setPointerCapture(e.pointerId);last=point(e);
 });
 canvas.addEventListener("pointermove",e=>{
- if(!drag||!photo)return;const p=point(e);state.x+=p.x-last.x;state.y+=p.y-last.y;last=p;draw();
+ if(!dragging||!photo)return;
+ const p=point(e);state.x+=p.x-last.x;state.y+=p.y-last.y;last=p;draw();
 });
-canvas.addEventListener("pointerup",()=>drag=false);
-canvas.addEventListener("pointercancel",()=>drag=false);
+canvas.addEventListener("pointerup",()=>dragging=false);
+canvas.addEventListener("pointercancel",()=>dragging=false);
 
-zoom.oninput=()=>{state.zoom=+zoom.value;draw()}
 function move(dx,dy){if(!photo)return;state.x+=dx;state.y+=dy;draw()}
+zoom.oninput=()=>{state.zoom=+zoom.value;draw()};
+document.getElementById("center").onclick=()=>{center();draw()};
+document.getElementById("reset").onclick=()=>{center();draw()};
+document.getElementById("fit").onclick=()=>{center();draw()};
 document.getElementById("up").onclick=()=>move(0,-15);
 document.getElementById("down").onclick=()=>move(0,15);
 document.getElementById("left").onclick=()=>move(-15,0);
 document.getElementById("right").onclick=()=>move(15,0);
-document.getElementById("center").onclick=()=>{center();draw()};
-document.getElementById("reset").onclick=()=>{center();draw()};
-document.getElementById("fit").onclick=fit;
 document.getElementById("plus").onclick=()=>{zoom.value=Math.min(3.5,+zoom.value+.1);state.zoom=+zoom.value;draw()};
 document.getElementById("minus").onclick=()=>{zoom.value=Math.max(.35,+zoom.value-.1);state.zoom=+zoom.value;draw()};
 
-function render(outW,outH){
- const out=document.createElement("canvas");out.width=outW;out.height=outH;
- const c=out.getContext("2d",{alpha:false});
- c.fillStyle="#000";c.fillRect(0,0,outW,outH);
- const sx=outW/canvas.width, sy=outH/canvas.height;
- c.save();c.scale(sx,sy);
+function renderOriginal(){
+ const out=document.createElement("canvas");out.width=1024;out.height=1536;
+ const c=out.getContext("2d",{alpha:false});c.fillStyle="#000";c.fillRect(0,0,1024,1536);
  if(photo){
-   c.save();c.beginPath();c.rect(PHOTO.x,PHOTO.y,PHOTO.w,PHOTO.h);c.clip();
-   const s=scale(),w=photo.width*s,h=photo.height*s;
-   c.drawImage(photo,state.x-w/2,state.y-h/2,w,h);c.restore();
+  c.save();c.beginPath();c.rect(PHOTO.x,PHOTO.y,PHOTO.w,PHOTO.h);c.clip();
+  const s=currentScale(),w=photo.width*s,h=photo.height*s;
+  c.drawImage(photo,state.x-w/2,state.y-h/2,w,h);c.restore();
  }
- c.drawImage(overlay,0,0,canvas.width,canvas.height);
- c.restore();
+ c.drawImage(overlay,0,0,1024,1536);
+ return out;
+}
+function renderStory(){
+ const out=document.createElement("canvas");out.width=1080;out.height=1920;
+ const c=out.getContext("2d",{alpha:false});c.fillStyle="#000";c.fillRect(0,0,1080,1920);
+ const s=1080/1024,y=(1920-1536*s)/2;
+ c.save();c.translate(0,y);c.scale(s,s);
+ if(photo){
+  c.save();c.beginPath();c.rect(PHOTO.x,PHOTO.y,PHOTO.w,PHOTO.h);c.clip();
+  const z=currentScale(),w=photo.width*z,h=photo.height*z;
+  c.drawImage(photo,state.x-w/2,state.y-h/2,w,h);c.restore();
+ }
+ c.drawImage(overlay,0,0,1024,1536);c.restore();
  return out;
 }
 function download(kind){
- if(!photo){msg("Escolha uma foto antes de baixar.");return}
- const out=kind==="story"?render(1080,1920):render(1024,1536);
+ if(!photo){statusMsg("Escolha uma foto antes de baixar.");return}
+ const out=kind==="story"?renderStory():renderOriginal();
  out.toBlob(blob=>{
-   const url=URL.createObjectURL(blob),a=document.createElement("a");
-   a.href=url;a.download=kind==="story"?"comrades-100-stories-reels.png":"comrades-100-original.png";
-   document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);
-   msg("Imagem baixada. Agora é só publicar no Instagram.");
+  const u=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=u;a.download=kind==="story"?"comrades-100-story-reels.png":"comrades-100-foto-oficial.png";
+  document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1000);
+  statusMsg("Download concluído.");
  },"image/png");
 }
-document.getElementById("downloadStory").onclick=()=>download("story");
-document.getElementById("downloadOriginal").onclick=()=>download("original");
-
+downloadStory.onclick=()=>download("story");
+downloadOriginal.onclick=()=>download("original");
 document.addEventListener("keydown",e=>{
  if(!photo)return;const n=e.shiftKey?30:10;
- if(e.key==="ArrowUp")move(0,-n); if(e.key==="ArrowDown")move(0,n);
- if(e.key==="ArrowLeft")move(-n,0); if(e.key==="ArrowRight")move(n,0);
+ if(e.key==="ArrowUp")move(0,-n);
+ if(e.key==="ArrowDown")move(0,n);
+ if(e.key==="ArrowLeft")move(-n,0);
+ if(e.key==="ArrowRight")move(n,0);
 });
 </script>
 </body>
