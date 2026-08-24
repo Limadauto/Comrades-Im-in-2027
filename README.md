@@ -1,6 +1,6 @@
-# EU VOU! — 59ª Corrida São Silvério
+# I am in! — 100ª Comrades
 
-Editor oficial de foto para a 59ª Corrida São Silvério.
+Editor oficial de foto para a 100ª Comrades
 
 ## Publicar no GitHub Pages
 1. Envie `index.html`, `manifest.json`, `sw.js` e `template-overlay.png` para a raiz do repositório.
